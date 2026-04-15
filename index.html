@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Perroquet PGNEP v3.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1a7a3c;
+    --green-light: #2ea84f;
+    --green-dark: #0e4d25;
+    --gold: #e8a900;
+    --gold-light: #ffd95e;
+    --cream: #fefcf5;
+    --text: #1a1a1a;
+    --gray: #6b7280;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    position: relative;
+    background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 50%, var(--green-light) 100%);
+    padding: 60px 24px 80px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 30%, rgba(232,169,0,0.18) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(255,255,255,0.07) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--green-dark);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 50px;
+    margin-bottom: 20px;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  .hero-parrot {
+    font-size: 72px;
+    line-height: 1;
+    margin-bottom: 12px;
+    animation: popIn 0.7s cubic-bezier(.17,.67,.3,1.3) 0.1s both;
+    filter: drop-shadow(0 4px 16px rgba(0,0,0,0.25));
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 6px;
+    animation: fadeUp 0.7s ease 0.2s both;
+  }
+
+  .hero h1 span { color: var(--gold-light); }
+
+  .hero-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.5px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.7s ease 0.3s both;
+  }
+
+  .hero-tagline {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    padding: 14px 20px;
+    color: white;
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 360px;
+    margin: 0 auto;
+    animation: fadeUp 0.7s ease 0.4s both;
+  }
+
+  /* ---- FEATURES GRID ---- */
+  .features-section {
+    padding: 48px 20px 32px;
+  }
+
+  .section-label {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    color: var(--text);
+    margin-bottom: 28px;
+    line-height: 1.25;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .feature-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 18px 14px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    border: 1px solid rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(26,122,60,0.14);
+  }
+
+  .feature-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .feature-card h3 {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .feature-card:nth-child(1) { animation-delay: 0.1s; }
+  .feature-card:nth-child(2) { animation-delay: 0.15s; }
+  .feature-card:nth-child(3) { animation-delay: 0.2s; }
+  .feature-card:nth-child(4) { animation-delay: 0.25s; }
+  .feature-card:nth-child(5) { animation-delay: 0.3s; }
+  .feature-card:nth-child(6) { animation-delay: 0.35s; }
+  .feature-card:nth-child(7) { animation-delay: 0.4s; }
+  .feature-card:nth-child(8) { animation-delay: 0.45s; }
+
+  /* ---- HIERARCHY ---- */
+  .hierarchy-section {
+    margin: 8px 20px 32px;
+    background: linear-gradient(135deg, #f0faf4 0%, #e8f5ed 100%);
+    border: 1px solid rgba(26,122,60,0.15);
+    border-radius: 16px;
+    padding: 20px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hierarchy-section h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: var(--green-dark);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .hierarchy-chain {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .role-pill {
+    background: var(--green);
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 50px;
+    white-space: nowrap;
+  }
+
+  .arrow {
+    color: var(--green);
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .hierarchy-note {
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--gray);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  /* ---- PLATFORMS ---- */
+  .platforms-row {
+    text-align: center;
+    padding: 0 20px 32px;
+  }
+
+  .platforms-row p {
+    font-size: 12px;
+    color: var(--gray);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  .platform-chips {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .chip {
+    background: var(--white);
+    border: 1.5px solid var(--green);
+    color: var(--green);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  /* ---- CTA / CONTACT ---- */
+  .contact-section {
+    background: linear-gradient(135deg, var(--green-dark), var(--green));
+    margin: 0;
+    padding: 40px 24px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-section::before {
+    content: '🦜';
+    position: absolute;
+    font-size: 140px;
+    opacity: 0.06;
+    right: -20px;
+    top: -10px;
+    transform: rotate(15deg);
+    pointer-events: none;
+  }
+
+  .contact-section h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold-light);
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+
+  .contact-section p.sub {
+    color: rgba(255,255,255,0.7);
+    font-size: 13px;
+    margin-bottom: 28px;
+  }
+
+  .contact-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 320px;
+    margin: 0 auto 20px;
+  }
+
+  .contact-card {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 14px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+
+  .contact-card:hover {
+    background: rgba(255,255,255,0.18);
+    transform: scale(1.02);
+  }
+
+  .contact-card .icon-circle {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .contact-card.tel1 .icon-circle { background: rgba(232,169,0,0.25); }
+  .contact-card.tel2 .icon-circle { background: rgba(46,168,79,0.25); }
+  .contact-card.wa   .icon-circle { background: rgba(37,211,102,0.25); }
+
+  .contact-card .info { text-align: left; }
+  .contact-card .label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 2px;
+  }
+  .contact-card .number {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.5px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .wa-note {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 4px;
+  }
+
+  /* ---- FOOTER ---- */
+  .footer {
+    background: var(--green-dark);
+    text-align: center;
+    padding: 16px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.5px;
+  }
+
+  .footer span { color: var(--gold); }
+
+  /* ---- ANIMATIONS ---- */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.4) rotate(-20deg); }
+    to   { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+
+  /* Divider */
+  .divider {
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--green-light), var(--gold));
+    opacity: 0.4;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Plateforme Numérique Éducative · CI</div>
+  <div class="hero-parrot">🦜</div>
+  <h1>Le <span>Perroquet</span></h1>
+  <p class="hero-sub">PGNEP v3.0 — Gestion des Notes du Cycle Primaire</p>
+  <div class="hero-tagline">
+    La solution <strong>100% numérique</strong> pour gérer les notes, bulletins et statistiques de vos élèves en Côte d'Ivoire.
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FEATURES -->
+<section class="features-section">
+  <p class="section-label">Fonctionnalités clés</p>
+  <h2 class="section-title">Tout ce dont vous avez besoin</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">📊</span>
+      <h3>Calcul automatique des moyennes selon les barèmes officiels</h3>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🥇</span>
+      <h3>Rang de chaque élève dans sa classe</h3>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📄</span>
+      <h3>Bulletins de notes imprimables en 1 clic</h3>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🎓</span>
+      <h3>DFA calculée automatiquement</h3>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📋</span>
+      <h3>Liste de classe par ordre alpha ou rang</h3>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📈</span>
+      <h3>Statistiques par sexe et composition</h3>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🔒</span>
+      <h3>8 profils sécurisés avec cloisonnement</h3>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">💻</span>
+      <h3>PC, navigateur web et Android</h3>
+    </div>
+  </div>
+</section>
+
+<!-- HIERARCHY -->
+<div class="hierarchy-section">
+  <h3>🏛️ Hiérarchie des accès</h3>
+  <div class="hierarchy-chain">
+    <span class="role-pill">Instituteur</span>
+    <span class="arrow">→</span>
+    <span class="role-pill">Directeur</span>
+    <span class="arrow">→</span>
+    <span class="role-pill">CPPP</span>
+    <span class="arrow">→</span>
+    <span class="role-pill">Corresp. IEPP</span>
+    <span class="arrow">→</span>
+    <span class="role-pill">Coord. DRENAET</span>
+    <span class="arrow">→</span>
+    <span class="role-pill">Administrateur</span>
+  </div>
+  <p class="hierarchy-note">Chaque utilisateur ne voit que les données de son périmètre.</p>
+</div>
+
+<!-- PLATFORMS -->
+<div class="platforms-row">
+  <p>Disponible sur</p>
+  <div class="platform-chips">
+    <div class="chip">💻 PC & Web</div>
+    <div class="chip">📱 Android</div>
+    <div class="chip">🌐 Navigateur</div>
+  </div>
+</div>
+
+<!-- CONTACT CTA -->
+<section class="contact-section">
+  <h2>Contactez-nous</h2>
+  <p class="sub">Rejoignez des milliers d'enseignants qui font confiance au Perroquet</p>
+
+  <div class="contact-cards">
+    <a class="contact-card tel1" href="tel:0104924532">
+      <div class="icon-circle">📞</div>
+      <div class="info">
+        <div class="label">Téléphone 1</div>
+        <div class="number">01 04 92 45 32</div>
+      </div>
+    </a>
+    <a class="contact-card tel2" href="tel:0104924578">
+      <div class="icon-circle">📞</div>
+      <div class="info">
+        <div class="label">Téléphone 2</div>
+        <div class="number">01 04 92 45 78</div>
+      </div>
+    </a>
+    <a class="contact-card wa" href="https://wa.me/2250140995877" target="_blank">
+      <div class="icon-circle">💬</div>
+      <div class="info">
+        <div class="label">WhatsApp</div>
+        <div class="number">01 40 99 58 77</div>
+      </div>
+    </a>
+  </div>
+
+  <p class="wa-note">Cliquez pour nous écrire directement sur WhatsApp</p>
+</section>
+
+<div class="footer">
+  © 2026 <span>Le Perroquet PGNEP v3.0</span> — Côte d'Ivoire
+</div>
+
+</body>
+</html>
